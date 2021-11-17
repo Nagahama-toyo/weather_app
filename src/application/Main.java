@@ -10,11 +10,15 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+/*
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+*/
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -32,8 +36,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 public class Main extends Application {
-    TableView<Result> table;
-    ObservableList<Result> data;
+    public static final ObservableList<String> weathers = 
+        FXCollections.observableArrayList();
+    public static final ObservableList<String> pops = 
+        FXCollections.observableArrayList();
 
     @Override
     public void start(final Stage stage) {
@@ -49,6 +55,24 @@ public class Main extends Application {
         root.getChildren().addAll(label, input_prefecture, btns);
 
         stage.setTitle("天気予報したるで");
+
+        HBox views = new HBox();
+        final ListView<String> listView_weathers = new ListView<>(weathers);
+        final ListView<String> listView_pops = new ListView<>(pops);
+        listView_weathers.setPrefSize(200, 250);
+        listView_weathers.setEditable(true);
+        listView_pops.setPrefSize(200, 250);
+        listView_pops.setEditable(true);
+        weathers.addAll(" ");
+        pops.add(" ");
+        listView_weathers.setItems(weathers);
+        listView_pops.setItems(pops);
+        views.getChildren().addAll(listView_weathers, listView_pops);
+
+
+                        
+            
+        root.getChildren().add(views);
 
         Scene scene = new Scene(root, 300, 100);
 
@@ -152,17 +176,54 @@ public class Main extends Application {
                     
                 }
 
-                String[][] Name_array = new String[kuiki_result_Name.size()][7]; 
+                String[] Name_array = new String[kuiki_result_Name.size()]; 
                 System.out.println("++++++++++++++");
                 for (int i = 0; i < kuiki_result_Name.size(); i++) {
                     System.out.println("--------------");
                     String tmp_arr[] = kuiki_result_Name.get(i).split("\n");
-                    for (int h = 0; h < tmp_arr.length; h++){
-                        Name_array[i][h] = tmp_arr[h];
-                        System.out.println(Name_array[i][h]);
-                    }
+                    Name_array[i] = tmp_arr[0];
                     
                 }
+                
+
+                //weathers
+                for (int i = 0; i < weathers.size(); i++) {
+                    System.out.println(weathers.get(i));
+                    
+                }
+
+                weathers.clear();
+            
+                
+                for (int i = 0; i < Name_array.length; i++){
+                    weathers.add(Name_array[i]);
+                    for (int j = 0; j < weather_array[i].length; j++) {
+                        weathers.add(weather_array[i][j]);
+                    }
+                }
+                
+
+                //pops
+                for (int i = 0; i < pops.size(); i++) {
+                    System.out.println(pops.get(i));
+                    
+                }
+
+                
+                pops.clear();
+                    
+                
+                for (int i = 0; i < Name_array.length; i++){
+                    pops.add(Name_array[i]);
+                    pops.add(" ");
+                    for (int j = 0; j < POP_array[i].length -1 ; j++) {
+                        pops.add(POP_array[i][j]);
+                    }
+                }
+
+
+
+                
 
                 label.setText("都道府県名を入力してください(例)；滋賀県");
             } else {
@@ -175,28 +236,6 @@ public class Main extends Application {
 
         EventHandler<ActionEvent> stopBtnActionFilter = (event) -> {
             System.out.println("stop button was pushed!");
-            table = new TableView<>();
-            table.setEditable(true);
-            
-            
-            
-            data = FXCollections.observableArrayList();
-            table.itemsProperty().setValue(data);
-            table.setItems(data);
-            
-            TableColumn<Result, String> weatherCol = new TableColumn<>("天気");
-            TableColumn<Result, String> POPCol = new TableColumn<>("降水確率");
-            table.getColumns().addAll(weatherCol,POPCol);
-
-            HBox hbox = new HBox();
-            hbox.setSpacing(5);
-            hbox.setPadding(new Insets(10, 0, 0, 10));
-            hbox.getChildren().addAll(label, table);
-            root.getChildren().addAll(hbox);
-
-            data.addAll( new Result("aaa ", " bbb") );
-            table.itemsProperty().setValue(data);
-            table.setItems(data);
 
             event.consume();
         };
