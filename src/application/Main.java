@@ -91,7 +91,6 @@ public class Main extends Application {
             //ProbabilityOfPrecipitation(POP)
             ArrayList<String> kuiki_result_POP = new ArrayList<>();
             ArrayList<String> kuiki_result_Name = new ArrayList<>();
-            //ArrayList<String> chiten_result = new ArrayList<>();
 
             if (input_prefecture.getText() != null && !input_prefecture.getText().isEmpty()) {
                 LocalDateTime now = LocalDateTime.now();
@@ -220,6 +219,29 @@ public class Main extends Application {
                         pops.add(POP_array[i][j]);
                     }
                 }
+
+                views.getChildren().clear();
+                for (int i = 0; i < Name_array.length; i++) {
+                    ObservableList<String> tmp_wList = FXCollections.observableArrayList();
+                    for (int j = 0; j < 8; j++) {
+
+                        if(j == 0){
+                            tmp_wList.add(weathers.get(j + i*8));
+                        } else if(j == 1){
+                            tmp_wList.add("11/" + Integer.toString(23 + j -1) + " " + weathers.get(j + i*8));
+                        } else{
+                            tmp_wList.add("11/" + Integer.toString(23 + j -1) + " 降水確率：" + pops.get(j + i*8) + "% " + weathers.get(j + i*8));
+                        }
+                    }
+                    ListView<String> tmp_wView = new ListView<>(tmp_wList);    
+                    tmp_wView.setPrefSize(250, 300);
+                    tmp_wView.setEditable(true);
+                    tmp_wView.setItems(tmp_wList);
+                    views.getChildren().addAll(tmp_wView);
+                }
+            
+
+
 
 
 
