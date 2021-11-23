@@ -38,10 +38,8 @@ class PreXMLAnalyzer extends Thread{
             XPath xpath = XPathFactory.newInstance().newXPath();
             XPathExpression expr = xpath.compile(search);
             NodeList nodeList = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		    // 5.XPathでの検索結果を持っているNodeListの内容でループ
             //System.out.println(nodeList.getLength());
             for (int i = 0; i < nodeList.getLength(); i++) {
-                // 6.要素を検索しているのでNodeの実体はElement。キャストして使う。
                 Element element = (Element) nodeList.item(i);
                 element_string = element.getTextContent();
                 element_string = element_string.trim();

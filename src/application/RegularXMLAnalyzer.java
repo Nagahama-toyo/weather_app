@@ -65,7 +65,7 @@ class RegularXMLThread extends Thread{
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmm");
             String fileName = now.format(dateTimeFormatter);
 
-            out = new File("C:/Users/toitt/Documents/B3_SecondSemester/DesignProject_Java/weather_19t2021j/tmp_xml/" + fileName + ".xml");
+            out = new File("C:/Users/toitt/Documents/B3_SecondSemester/DesignProject_Java/weather_app/tmp_xml/" + fileName + ".xml");
             Thread download = new Thread(new application.XMLDownloader(result, out));
             download.start();
             try {

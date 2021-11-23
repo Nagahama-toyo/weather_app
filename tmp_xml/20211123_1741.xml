@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx="http://xml.kishou.go.jp/jmaxml1/" xmlns:jmx_add="http://xml.kishou.go.jp/jmaxml1/addition1/">
+<Control>
+<Title>地方週間天気予報</Title>
+<DateTime>2021-11-23T07:31:23Z</DateTime>
+<Status>通常</Status>
+<EditorialOffice>札幌管区気象台</EditorialOffice>
+<PublishingOffice>札幌管区気象台</PublishingOffice>
+</Control>
+<Head xmlns="http://xml.kishou.go.jp/jmaxml1/informationBasis1/">
+<Title>北海道地方週間天気予報</Title>
+<ReportDateTime>2021-11-23T16:31:00+09:00</ReportDateTime>
+<TargetDateTime>2021-11-24T00:00:00+09:00</TargetDateTime>
+<EventID/>
+<InfoType>発表</InfoType>
+<Serial/>
+<InfoKind>平文情報</InfoKind>
+<InfoKindVersion>1.0_0</InfoKindVersion>
+<Headline>
+<Text/>
+</Headline>
+</Head>
+<Body xmlns="http://xml.kishou.go.jp/jmaxml1/body/meteorology1/">
+<Notice/>
+<Comment>
+<Text type="本文">予報期間　１１月２４日から１１月３０日まで
+　向こう一週間は、高気圧に覆われて晴れる日もありますが、気圧の谷や寒気の影響で曇りの日が多く、期間の前半は雪や雨の降る日があるでしょう。
+　なお、２５日頃にかけては、平地でも積雪や路面の凍結による交通障害のおそれがあります。
+　海は、波の高い日が多く、しける海域がある見込みです。
+　最高気温は、期間の前半は平年並か平年より低いですが、期間の後半は平年並か平年より高く、かなり高い所もあるでしょう。
+　最低気温は、平年並か平年より高く、期間の後半は平年よりかなり高い所もある見込みです。</Text>
+</Comment>
+</Body>
+</Report>
