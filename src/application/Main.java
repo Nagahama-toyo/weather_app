@@ -27,13 +27,12 @@ public class Main extends Application {
         VBox root = new VBox();
         HBox btns = new HBox();
         Button searchBtn = new Button("検索開始");
-        Button stopBtn = new Button("stop");
-        TextField input_prefecture = new TextField("滋賀県");
+        TextField input_prefecture = new TextField("");
         Label label = new Label("都道府県名を入力してください(例)；滋賀県");
         //static final Label alert = new Label(" ");
 
         root.setAlignment(Pos.CENTER);
-        btns.getChildren().addAll(searchBtn, stopBtn);
+        btns.getChildren().addAll(searchBtn);
         root.getChildren().addAll(label, input_prefecture, alert, btns);
 
         stage.setTitle("天気予報したるで");
@@ -92,9 +91,9 @@ public class Main extends Application {
 
                 }
                 
-                //検索対象が北海道か否かで処理が大きく違う
+                //検索対象が北海道、沖縄とそれ以外かで処理が大きく違う
                 String name_prefecture = input_prefecture.getText();
-                if(name_prefecture.equals("北海道")){
+                if(name_prefecture.equals("北海道")  | name_prefecture.equals("沖縄")){
                     regular_search_query = "//entry[content='【" + name_prefecture + "地方週間天気予報】']/id";
                     RegularXMLThread analyzer = new application.RegularXMLThread(out, regular_search_query);
                     analyzer.start();
@@ -250,13 +249,6 @@ public class Main extends Application {
             event.consume();
         };
         searchBtn.addEventHandler(ActionEvent.ANY, searchBtnActionFilter);
-
-        EventHandler<ActionEvent> stopBtnActionFilter = (event) -> {
-            System.out.println("stop button was pushed!");
-
-            event.consume();
-        };
-        stopBtn.addEventHandler(ActionEvent.ANY, stopBtnActionFilter);
 
         stage.setScene(scene);
         stage.show();
